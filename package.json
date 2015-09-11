@@ -1,0 +1,46 @@
+{
+  "name": "trader-radar",
+  "version": "0.0.1",
+  "author": "Callum Rimmer <callumt@deadtrendy.co.uk>",
+  "description": "Boiler plate finance web app with mocked REST and Web Sockets. React, ES6 and Flux",
+  "dependencies": {
+    "jquery": "*",
+    "underscore": "*",
+    "backbone": "*",
+    "react": "*",
+    "react-dom": "*",
+    "flux": "*",
+    "styl": "*",
+    "socket.io" : "*",
+    "es6-mixins" : "*",
+    "faker" : "*",
+    "json-server" : "*"
+  },
+  "devDependencies": {
+    "babelify": "*",
+    "browser-sync": "*",
+    "browserify": "*",
+    "gulp": "3.8.7",
+    "gulp-stylus" : "*",
+    "react-tools": "^0.13.3",
+    "babel-jest": "*",
+    "jest-cli" : "0.4.0",
+    "vinyl-source-stream": "*",
+    "gulp-json-srv" : "*",
+    "gulp-shell" : "*"
+  },
+  "scripts": {
+    "start": "npm install && gulp",
+    "test": "jest"
+  },
+  "jest": {
+    "scriptPreprocessor": "./node_modules/babel-jest",
+    "testFileExtensions": ["es6", "js"],
+    "moduleFileExtensions": ["js", "json", "es6"],
+    "unmockedModulePathPatterns":["react"]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/caljrimmer/react-flux-bill.git"
+  }
+}
