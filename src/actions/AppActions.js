@@ -1,5 +1,5 @@
 import AppDispatcher from '../dispatcher/AppDispatcher';
-import $ from 'jquery';
+import fetch from 'whatwg-fetch';
 import utils from '../lib/utils';
 import io from 'socket.io/node_modules/socket.io-client/lib/';
 
@@ -35,29 +35,37 @@ const actions = {
     },
 
     getOrders (){
-        $.ajax({
-            url: restPath + '/orders',
-            method : 'GET',
-            success: (data) => {
+
+        fetch(restPath + '/orders')
+            .then(function(response) {
+                return response.json()
+            }).then((json) => {
+                console.log('parsed json', json);
                 AppDispatcher.dispatch({
                     actionType: 'get-orders',
                     value: data
                 });
-            }
-        });
+            }).catch((ex) => {
+                console.log('parsing failed', ex)
+            });
+
     },
 
     getPortfolio (){
-        $.ajax({
-            url: restPath + '/portfolio',
-            method : 'GET',
-            success: (data) => {
+
+        fetch(restPath + '/portfolio')
+            .then(function(response) {
+                return response.json()
+            }).then((json) => {
+                console.log('parsed json', json);
                 AppDispatcher.dispatch({
                     actionType: 'get-portfolio',
                     value: data
                 });
-            }
-        });
+            }).catch((ex) => {
+                console.log('parsing failed', ex)
+            });
+
     }
 
 };

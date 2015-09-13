@@ -24,11 +24,9 @@ class Orders extends React.Component {
         const orders = this.props.collection;
         const stocks = this.props.stocks;
 
-        let OrderRows = orders.map((row) => {
+        let OrderRows = orders.each((row) => {
             let date, time = new Date(row.date).toLocaleString('en-UK').split(',');
-            if(!stocks.length) return;
             let stock = stocks.get({id:row.stockid});
-            console.log(stocks)
             let amount = Math.ceil(row.qty * stock.get('price'));
             return (
                 <li className={row.type === 'buy' ? 'buy' : 'sell'}>

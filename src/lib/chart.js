@@ -1,5 +1,5 @@
 //Lib
-import _ from 'underscore';
+import _ from 'lodash';
 import d3 from 'd3';
 
 var Chart = function Chart(options){

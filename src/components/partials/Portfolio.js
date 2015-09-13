@@ -21,7 +21,6 @@ class Portfolio extends React.Component {
         const stocks = this.props.stocks;
 
         let PortfolioRows = portfolio.map((row) => {
-            if(!stocks.length) return;
             let stock = stocks.get({id:row.stockid});
             return (
                 <tr>

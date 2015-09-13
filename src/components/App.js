@@ -21,9 +21,6 @@ import Portfolio from './partials/Portfolio';
 import Header from './partials/Header';
 import Footer from './partials/Footer';
 
-AppActions.getPortfolio();
-AppActions.getOrders();
-
 class App extends React.Component {
 
     constructor(props) {

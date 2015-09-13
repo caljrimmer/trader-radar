@@ -1,6 +1,6 @@
 import Backbone from 'backbone';
 import AppDispatcher from '../dispatcher/AppDispatcher';
-import _ from 'underscore';
+import _ from 'lodash';
 
 export class Stock extends Backbone.Model {
 
@@ -50,7 +50,8 @@ export class Stocks extends Backbone.Collection {
         switch (payload.actionType) {
             case 'get-stocks':
                 _.each(payload.value,(model) => {
-                    this.add(new Backbone.Model(model));
+                    this.add(new Backbone.Model(model),{silent:true});
+                    this.trigger('add');
                 })
                 break;
             case 'update-price':

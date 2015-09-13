@@ -1,6 +1,6 @@
 import Backbone from 'backbone';
 import AppDispatcher from '../dispatcher/AppDispatcher';
-import _ from 'underscore';
+import _ from 'lodash';
 
 class Trade extends Backbone.Model {
 
@@ -36,9 +36,8 @@ class Portfolio extends Backbone.Collection {
     dispatchCallback (payload) {
         switch (payload.actionType) {
             case 'get-portfolio':
-                _.each(payload.value,(model) => {
-                    this.add(new Backbone.Model(model));
-                })
+                _.each(payload.value,(model) => this.add(new Backbone.Model(model),{silent:true}));
+                this.trigger('add');
                 break;
             case 'delete-trade':
                 this.findWhere({id:payload.value.id}).remove();
