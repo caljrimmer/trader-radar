@@ -1,5 +1,6 @@
 //Lib
 import React from 'react';
+import chart from '../../lib/chart';
 
 //Mixin
 import mixins from 'es6-mixins';
@@ -13,8 +14,25 @@ class StockDetail extends React.Component {
     }
 
     render () {
+
+        let model = this.props.model;
+
+        /*
+        let el = ReactDOM.findDOMNode(this);
+        chart.bar(model.data.toJSON(),el);
+        */
+
         return (
-            <div className="stock-details"></div>
+            <div className="box">
+                <div className="stock-details">
+                    <div class="info">
+                        <h2>{model.name} ({model.symbol})</h2>
+                        <p>{model.desc}</p>
+                    </div>
+                    <div class="chart">
+                    </div>
+                </div>
+            </div>
         );
     }
 

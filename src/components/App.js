@@ -8,10 +8,21 @@ import BackboneMixin from '../mixin/BackboneMixin';
 //Actions
 import AppActions from '../actions/AppActions';
 
+//Stores
+import OrdersStore from '../store/OrdersStore';
+import PortfolioStore from '../store/PortfolioStore';
+import StocksStore from '../store/StocksStore';
+import StockStore from '../store/StockStore';
+
 //Partials
 import StockDetail from './partials/StockDetail';
+import Orders from './partials/Orders';
+import Portfolio from './partials/Portfolio';
 import Header from './partials/Header';
 import Footer from './partials/Footer';
+
+AppActions.getPortfolio();
+AppActions.getOrders();
 
 class App extends React.Component {
 
@@ -21,22 +32,15 @@ class App extends React.Component {
     }
 
     render () {
-        var model = this.props.model;
-        if(model.get('loading')){
-            return (
-                <div>
-                    <h1 className="loading">...Loading</h1>
-                </div>
-            )
-        }else{
-            return (
-                <div>
-                    <Header model={model} />
-                    <StockDetail model={model} />
-                    <Footer model={model} />
-                </div>
-            )
-        }
+        return (
+            <div>
+                <Header />
+                <StockDetail model={StockStore} />
+                <Orders stocks={StocksStore} collection={OrdersStore} />
+                <Portfolio stocks={StocksStore} collection={PortfolioStore} />
+                <Footer />
+            </div>
+        )
     }
 
 };

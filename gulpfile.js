@@ -21,11 +21,17 @@ var server = jsonServer.start({
   deferredStart: true
 });
 
+//Build Mock Data
+gulp.task('build-data', shell.task([
+  //Makes sure websockets are cleaned up
+  'node mock-services/restful/build.js --harmony'
+]));
+
 //Web Sockets
 gulp.task('websocket', shell.task([
   //Makes sure websockets are cleaned up
   'node mock-services/websockets/server.js ' + port.websocket
-]))
+]));
 
 gulp.task('browserify', function () {
   return b.bundle()
@@ -54,9 +60,6 @@ gulp.task('css', function() {
 gulp.task('watch', function () {
   gulp.watch('src/**/*.js', ['browserify']);
   gulp.watch('src/css/*.styl', ['css']);
-  gulp.watch(['mock-services/restful/db.json'], function(){
-    server.reload();
-  });
   gulp.watch('public/**').on('change', browserSync.reload)
 });
 

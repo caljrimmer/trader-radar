@@ -13,13 +13,9 @@ class Header extends React.Component {
     }
 
     render () {
-
-        var statement = this.props.model.get('statement');
-
         return (
             <div className="header">
-                <h2 className="logo">Sky</h2>
-                <p><em>This statement is for the period of {statement.period.from} to {statement.period.to}.</em></p>
+                <h2 className="logo">Trader Radar</h2>
             </div>
         );
     }

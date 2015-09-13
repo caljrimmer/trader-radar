@@ -14,6 +14,12 @@ var BackboneMixin = {
             });
         }
 
+        if (this.props.stocks) {
+            this.props.stocks.on('add remove reset sort', () => {
+                this.forceUpdate();
+            });
+        }
+
     },
 
     componentWillUnMount () {
@@ -24,6 +30,10 @@ var BackboneMixin = {
 
         if(this.props.collection){
             this.props.collection.off(null, null, this);
+        }
+
+        if(this.props.stocks){
+            this.props.stocks.off(null, null, this);
         }
 
     }

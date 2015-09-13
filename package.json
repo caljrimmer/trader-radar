@@ -13,8 +13,7 @@
     "styl": "*",
     "socket.io" : "*",
     "es6-mixins" : "*",
-    "faker" : "*",
-    "json-server" : "*"
+    "d3" : "*"
   },
   "devDependencies": {
     "babelify": "*",
@@ -27,6 +26,9 @@
     "jest-cli" : "0.4.0",
     "vinyl-source-stream": "*",
     "gulp-json-srv" : "*",
+    "json-server" : "*",
+    "lowdb" : "*",
+    "faker" : "*",
     "gulp-shell" : "*"
   },
   "scripts": {
