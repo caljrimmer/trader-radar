@@ -49,10 +49,12 @@ export class Stocks extends Backbone.Collection {
     dispatchCallback (payload) {
         switch (payload.actionType) {
             case 'get-stocks':
+                let modelArray = [];
                 _.each(payload.value,(model) => {
-                    this.add(new Backbone.Model(model),{silent:true});
-                    this.trigger('add');
-                })
+                    modelArray.push(new Backbone.Model(model));
+                });
+                this.add(modelArray,{silent:true});
+                this.trigger('add');
                 break;
             case 'update-price':
                 this.findWhere({id:payload.value.id}).set(payload.value);

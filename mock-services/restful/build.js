@@ -12,9 +12,9 @@ fs.exists(dbpath, function(exists) {
 
 var db = low(dbpath);
 var limits = {
-    chart : 21,
-    stocks : 101,
-    orders : 20,
+    chart : 20,
+    stocks : 100,
+    orders : 10,
     portfolio : 10
 };
 

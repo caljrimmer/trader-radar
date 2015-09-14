@@ -5,9 +5,6 @@ import React from 'react';
 import mixins from 'es6-mixins';
 import BackboneMixin from '../../mixin/BackboneMixin';
 
-//Actions
-import AppActions from '../../actions/AppActions';
-
 class Portfolio extends React.Component {
 
     constructor(props) {
@@ -15,9 +12,13 @@ class Portfolio extends React.Component {
         mixins(BackboneMixin,this);
     }
 
+    eventSell (e) {
+        e.preventDefault();
+    }
+
     render () {
 
-        const portfolio = this.props.collection;
+        const portfolio = this.props.collection.toJSON();
         const stocks = this.props.stocks;
 
         let PortfolioRows = portfolio.map((row) => {
@@ -28,7 +29,7 @@ class Portfolio extends React.Component {
                     <td>{stock.get('delta')}</td>
                     <td>{stock.get('price')}</td>
                     <td>{row.qty}</td>
-                    <td><a className="button sell" onClick={eventSell}>SELL</a></td>
+                    <td><a className="button sell" onClick={this.eventSell}>SELL</a></td>
                 </tr>
             )
         });

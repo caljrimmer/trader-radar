@@ -5,9 +5,6 @@ import React from 'react';
 import mixins from 'es6-mixins';
 import BackboneMixin from '../../mixin/BackboneMixin';
 
-//Actions
-import AppActions from '../../actions/AppActions';
-
 class Orders extends React.Component {
 
     constructor(props) {
@@ -15,16 +12,12 @@ class Orders extends React.Component {
         mixins(BackboneMixin,this);
     }
 
-    getInitialState () {
-        AppActions.getOrders();
-    }
-
     render () {
 
-        const orders = this.props.collection;
+        const orders = this.props.collection.toJSON();
         const stocks = this.props.stocks;
 
-        let OrderRows = orders.each((row) => {
+        let OrderRows = orders.map((row) => {
             let date, time = new Date(row.date).toLocaleString('en-UK').split(',');
             let stock = stocks.get({id:row.stockid});
             let amount = Math.ceil(row.qty * stock.get('price'));

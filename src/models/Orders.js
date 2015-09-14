@@ -1,6 +1,7 @@
 import Backbone from 'backbone';
 import AppDispatcher from '../dispatcher/AppDispatcher';
 import _ from 'lodash';
+import StocksStore from '../store/StocksStore';
 
 class Order extends Backbone.Model {
 
@@ -38,7 +39,11 @@ class Orders extends Backbone.Collection {
     dispatchCallback (payload) {
         switch (payload.actionType) {
             case 'get-orders':
-                _.each(payload.value,(model) => this.add(new Backbone.Model(model),{silent:true}));
+                let modelArray = [];
+                _.each(payload.value,(model) => {
+                    modelArray.push(new Backbone.Model(model));
+                });
+                this.add(modelArray,{silent:true});
                 this.trigger('add');
                 break;
         }

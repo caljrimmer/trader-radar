@@ -1,5 +1,5 @@
 import AppDispatcher from '../dispatcher/AppDispatcher';
-import fetch from 'whatwg-fetch';
+import 'whatwg-fetch';
 import utils from '../lib/utils';
 import io from 'socket.io/node_modules/socket.io-client/lib/';
 
@@ -12,6 +12,8 @@ const socket = io(socketPath);
 
 socket.on('stocks', (data) => {
     actions.getStocks(data);
+    actions.getOrders();
+    actions.getPortfolio();
 });
 
 socket.on('price', (data) => {
@@ -37,34 +39,30 @@ const actions = {
     getOrders (){
 
         fetch(restPath + '/orders')
-            .then(function(response) {
-                return response.json()
-            }).then((json) => {
-                console.log('parsed json', json);
+            .then(utils.status)
+            .then(utils.json)
+            .then(function(json) {
+                console.log('request succeeded with json response', json);
                 AppDispatcher.dispatch({
                     actionType: 'get-orders',
-                    value: data
+                    value: json
                 });
-            }).catch((ex) => {
-                console.log('parsing failed', ex)
-            });
+            })
 
     },
 
     getPortfolio (){
 
         fetch(restPath + '/portfolio')
-            .then(function(response) {
-                return response.json()
-            }).then((json) => {
-                console.log('parsed json', json);
+            .then(utils.status)
+            .then(utils.json)
+            .then(function(json) {
+                console.log('request succeeded with json response', json);
                 AppDispatcher.dispatch({
                     actionType: 'get-portfolio',
-                    value: data
+                    value: json
                 });
-            }).catch((ex) => {
-                console.log('parsing failed', ex)
-            });
+            })
 
     }
 
